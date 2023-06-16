@@ -26,9 +26,9 @@ async function getWikipediaHeaders() {
 - `await`은 자바스크립트로 하여금 내부적으로 `then()` 함수를 호출 함
 - `await` 이벤트 루프의 다음 차례까지 실행을 일시 정지 시킴
   - await vs return ???
-  | promise         | await            | return                           |
-  | --------------- | ---------------- | -------------------------------- |
-  | async 함수 실행 | 일시정지 후 재개 | 종료하고 return된 함수 재개 안함 |
+    | promise | await | return |
+    | --------------- | ---------------- | -------------------------------- |
+    | async 함수 실행 | 일시정지 후 재개 | 종료하고 return된 함수 재개 안함 |
 
 ```tsx
 async function test() {
@@ -67,7 +67,7 @@ async function fn1() {
   return asyncFunction();
 }
 
-async function fn2()
+async function fn2() {
   //  asyncFunction()의 오류들을 처리하고자 한다면 이 방법이 좋다.
   const ret = await asyncFunction();
   return ret;
@@ -87,3 +87,35 @@ async function fn2()
 - async 함수가 일시 정지 일 때 다른 자바스크립트가 작동할 수 있음
 - 오류 처리는 일상적인 문제입니다. 오류는 가능한 `.catch()`로 처리
 </aside>
+
+# Promise
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a6380388-0561-4c59-8e1e-1fb18ff8a40c/Untitled.png)
+
+### 왜 쓰는가?
+
+callback 지옥 >> 보다 더 편하게 비동기 관리하기 위해
+
+- pending 보류중
+- fulfilled 성공
+- rejected 오류 발생
+
+```jsx
+let promise = fetch("api/give-me-json");
+
+promise.then(
+  (response) => {
+    console.log(response);
+  },
+  (err) => {
+    console.log(err);
+  }
+);
+```
+
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d50038e4-08d1-4a2d-9c95-b989f07d5666/Untitled.png)
+
+- @ …
+  [async-await와 try-catch](https://velog.io/@yjyoo/async-await와-try-catch)
+  https://gcback-1.gitbook.io/mastering-async-await-by-valeri-karpov/0.
+  [https://medium.com/dailyjs/asynchronous-adventures-in-javascript-promises-1e0da27a3b4#:~:text=Promises are not a new,popular by jQuery Deferred Objects](https://medium.com/dailyjs/asynchronous-adventures-in-javascript-promises-1e0da27a3b4#:~:text=Promises%20are%20not%20a%20new,popular%20by%20jQuery%20Deferred%20Objects)
